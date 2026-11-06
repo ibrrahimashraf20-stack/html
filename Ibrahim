@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IBRAHIM Browser</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #30000c, #090509 75%);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 22px;
+  border-bottom: 1px solid #ff1744;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #ff1744;
+  text-shadow: 0 0 15px red;
+}
+
+.status {
+  color: #ff647e;
+  font-size: 11px;
+}
+
+main {
+  width: 90%;
+  max-width: 700px;
+  margin: 110px auto;
+  text-align: center;
+}
+
+.logo {
+  font-size: clamp(45px, 12vw, 75px);
+  font-weight: 900;
+  letter-spacing: -4px;
+  text-shadow: 0 0 12px red, 0 0 35px #ff1744;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #ff879a;
+  letter-spacing: 4px;
+  font-size: 12px;
+  margin-bottom: 40px;
+}
+
+.search-box {
+  display: flex;
+  padding: 7px;
+  border: 1px solid #ff1744;
+  border-radius: 50px;
+  background: #180910;
+  box-shadow: 0 0 20px #ff174455;
+}
+
+.search-box:focus-within {
+  box-shadow: 0 0 30px #ff1744;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+}
+
+input::placeholder {
+  color: #a77b84;
+}
+
+.search-button {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: #ff1744;
+  color: white;
+  font-size: 23px;
+  cursor: pointer;
+  box-shadow: 0 0 15px red;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 25px 0 55px;
+}
+
+.action {
+  background: #220711;
+  color: white;
+  border: 1px solid #ff1744;
+  border-radius: 10px;
+  padding: 12px 18px;
+  cursor: pointer;
+}
+
+.action:hover {
+  box-shadow: 0 0 18px red;
+}
+
+h3 {
+  color: #ff647e;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.shortcuts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+}
+
+.shortcut {
+  text-decoration: none;
+  color: white;
+  background: #190b11;
+  border: 1px solid #641126;
+  border-radius: 16px;
+  padding: 20px 5px;
+  transition: .2s;
+}
+
+.shortcut:hover {
+  transform: translateY(-5px);
+  border-color: #ff1744;
+  box-shadow: 0 0 20px #ff174477;
+}
+
+.shortcut b {
+  display: block;
+  font-size: 25px;
+  color: #ff385d;
+  margin-bottom: 12px;
+}
+
+.shortcut span {
+  font-size: 12px;
+}
+
+footer {
+  text-align: center;
+  color: #82414e;
+  font-size: 11px;
+  letter-spacing: 2px;
+  padding: 25px;
+}
+
+@media(max-width:450px) {
+  .shortcuts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  main {
+    margin-top: 75px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">IBRAHIM</div>
+  <div class="status">● NEON MODE</div>
+</header>
+
+<main>
+
+  <div class="logo">IBRAHIM</div>
+  <div class="subtitle">YOUR WEB. YOUR WAY.</div>
+
+  <form class="search-box" id="searchForm">
+    <input
+      id="search"
+      type="text"
+      placeholder="Search or enter a website..."
+    >
+    <button class="search-button">⌕</button>
+  </form>
+
+  <div class="buttons">
+    <button class="action" onclick="searchWeb()">
+      Google Search
+    </button>
+    <button class="action" onclick="lucky()">
+      I'm Feeling Lucky
+    </button>
+  </div>
+
+  <h3>QUICK ACCESS</h3>
+
+  <div class="shortcuts">
+    <a class="shortcut" href="https://google.com">
+      <b>G</b><span>Google</span>
+    </a>
+
+    <a class="shortcut" href="https://youtube.com">
+      <b>▶</b><span>YouTube</span>
+    </a>
+
+    <a class="shortcut" href="https://roblox.com">
+      <b>◇</b><span>Roblox</span>
+    </a>
+
+    <a class="shortcut" href="https://minecraft.net">
+      <b>▦</b><span>Minecraft</span>
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  IBRAHIM BROWSER © 2026
+</footer>
+
+<script>
+function searchWeb() {
+  const query = document.getElementById("search").value.trim();
+
+  if (!query) return;
+
+  const isURL =
+    /^(https?:\/\/)/i.test(query) ||
+    /^([\w-]+\.)+[a-z]{2,}(\/.*)?$/i.test(query);
+
+  if (isURL) {
+    window.location.href =
+      query.startsWith("http") ? query : "https://" + query;
+  } else {
+    window.location.href =
+      "https://www.google.com/search?q=" +
+      encodeURIComponent(query);
+  }
+}
+
+document.getElementById("searchForm")
+.addEventListener("submit", function(e) {
+  e.preventDefault();
+  searchWeb();
+});
+
+function lucky() {
+  window.location.href = "https://www.google.com/doodles";
+}
+</script>
+
+</body>
+</html>
+
